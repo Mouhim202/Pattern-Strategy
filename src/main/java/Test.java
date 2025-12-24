@@ -1,10 +1,17 @@
+import java.util.Scanner;
+
 public class Test {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         Context context=new Context();
-        context.applyStrategy();
-        context.setStrategy(new StrategyImpl1());
-        context.applyStrategy();
-        context.setStrategy(new StrategyImpl2());
-        context.applyStrategy();
+        Scanner scanner=new Scanner(System.in);
+        while (true){
+            System.out.println("Qelle stratégie?");
+            String strateyName=scanner.nextLine();
+            Class strateyClass= Class.forName(strateyName);
+            Strategy strategy=(Strategy)strateyClass.newInstance();
+            context.setStrategy(strategy);
+            context.applyStrategy();
+        }
+
     }
 }
